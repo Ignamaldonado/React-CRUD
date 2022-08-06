@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import Petlist from "./components/Petlist"
 import Form from "./components/Form"
@@ -7,7 +7,12 @@ function App() {
   
   const [pets, setPets] = useState([])
   const [pet, setPet] = useState({})
-  
+
+
+  useEffect(() => {
+      localStorage.setItem('petsLS', JSON.stringify(pets)) //localstorage solo guarda strings
+  }, [pets])
+
   const getId = id => {
     const updatedPets = pets.filter(pet => pet.id !== id)
     setPets(updatedPets)
