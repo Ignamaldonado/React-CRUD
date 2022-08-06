@@ -8,14 +8,17 @@ function App() {
   const [pets, setPets] = useState([])
   const [pet, setPet] = useState({})
   
-
+  const getId = id => {
+    const updatedPets = pets.filter(pet => pet.id !== id)
+    setPets(updatedPets)
+  }
 
   return (
     <div className="container mx-auto mt-20">
       <Header />
       <div className="flex mt-12">
         <Form setPets={setPets} setPet={setPet} pets={pets} pet={pet} />
-        <Petlist pets={pets} setPet={setPet} setPets={setPets} />
+        <Petlist pets={pets} setPet={setPet} getId={getId} />
       </div>
     </div>
   )

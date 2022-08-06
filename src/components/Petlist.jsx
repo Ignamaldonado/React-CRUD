@@ -1,19 +1,7 @@
 import {useEffect, useState} from 'react'
 import PetInfo from "./PetInfo"
 
-const Petlist = ({pets, setPet, setPets}) => {
-
-  const [deletePet, setDeletePet] = useState({})
-
-  useEffect(() => {
-    if(Object.keys(deletePet).length > 0) {
-      const deletedPet = pets.map(pet => pet.id !== deletePet.id)
-        setPets(deletedPet)
-        setDeletePet({})
-    }
-  }, [deletePet])
-  
-  
+const Petlist = ({pets, setPet, getId}) => {
 
   return (
     <div className='md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll'>
@@ -26,8 +14,8 @@ const Petlist = ({pets, setPet, setPets}) => {
           Follow your {''}
           <span className='text-blue-300 font-bold'>pet health!</span>
       </p>
-      { pets.map( pet => {
-          return(  <PetInfo pet={pet} key={pet.id} setPet={setPet} /> )
+      { pets.map( pet => {        
+        return(<PetInfo pet={pet} key={pet.id} setPet={setPet} getId={getId} />) 
       })}
       </>
       
@@ -39,7 +27,7 @@ const Petlist = ({pets, setPet, setPets}) => {
           <span className='text-blue-300 font-bold'>pet's health!</span>
       </p>
       { pets.map( pet => {
-          return(  <PetInfo pet={pet} key={pet.id} setPet={setPet} setDeletePet={setDeletePet} /> )
+          return(  <PetInfo pet={pet} key={pet.id} setPet={setPet} getId={getId}  /> )
       })}
       </>
       }

@@ -1,16 +1,39 @@
 import Button from "./Button"
+import Swal from 'sweetalert2'
 
-const PetInfo = ({ pet, setPet, setDeletePet }) => {
 
-    const { name , age , weight , type, comment } = pet
+const PetInfo = ({ pet, setPet, getId }) => {
+    const { name , age , weight , type, comment, id } = pet
 
-    const getPet = () => {
+    const handleEdit = () => {
         setPet(pet)
     }
 
-    const getDeletePet = () => {
-        setDeletePet(pet)
+    const handleDelete = () => {
+        Swal.fire({
+            title:'Are you sure you want to delete your pet?',
+            text:"You can't revert this action!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#22c55e',
+            cancelButtonColor: '#ef4444',
+            confirmButtonText: 'yes, delete it!'
+        })
+            .then(result => {
+                if(result.isConfirmed) {
+                    getId(id)
+                    Swal.fire({
+                        title:'Deleted!',
+                        text:'You precious pet has been deleted...',
+                        icon: 'success',
+                        confirmButtonColor: '#22c55e',
+                        confirmButtonText: 'OK'
+                    })
+                }
+            })
+        
     }
+
 
   return (
     <div className='mt-5 bg-white shadow-md mx-3 p-5 rounded-xl'>
@@ -30,15 +53,8 @@ const PetInfo = ({ pet, setPet, setDeletePet }) => {
       <span className='font-normal normal-case'>{comment}</span>
     </p>
     <div className='flex justify-between'>
-        <Button name={'Edit'} style={'py-2 px-5 bg-green-500 hover:bg-green-600 mx-10 mt-5 rounded-md text-white'} fn={getPet}/>
-        <button
-            type="button"
-            className='py-2 px-5 bg-red-500 hover:bg-red-600 mx-10 mt-5 rounded-md text-white'
-            onClick={getDeletePet}
-        >
-            Delete
-        </button>
-        
+        <Button name={'Edit'} style={'py-2 px-5 bg-green-500 hover:bg-green-600 mx-10 mt-5 rounded-md text-white'} fn={handleEdit}/>
+        <Button name={'Delete'} style={'py-2 px-5 bg-red-500 hover:bg-red-600 mx-10 mt-5 rounded-md text-white'} fn={handleDelete}/>
     </div>
   </div>
   )
