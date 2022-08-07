@@ -4,10 +4,11 @@ import Petlist from "./components/Petlist"
 import Form from "./components/Form"
 
 function App() {
-  
-  const [pets, setPets] = useState([])
-  const [pet, setPet] = useState({})
 
+  let savedPets = JSON.parse(localStorage.getItem('petsLS')) ?? []
+  
+  const [pets, setPets] = useState(savedPets)
+  const [pet, setPet] = useState({})
 
   useEffect(() => {
       localStorage.setItem('petsLS', JSON.stringify(pets)) //localstorage solo guarda strings
