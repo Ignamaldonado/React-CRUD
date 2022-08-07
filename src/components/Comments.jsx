@@ -6,7 +6,7 @@ const Comments = ({value, Hook}) => {
     <textarea 
       id='comment'
       className='border-2 w-full p-1 mt-2 border-blue-300 rounded-md placeholder-gray-400'
-      placeholder='comments'
+      placeholder='Comments'
       value={value}
       onChange={Hook}
     />

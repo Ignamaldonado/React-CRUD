@@ -43,7 +43,7 @@ const Form = ({ pet, pets, setPets, setPet }) => {
     
     
     //validacion
-    const numberRegEx = /^\d+$/
+    const numberRegEx = /^[+]?\d+([.]\d+)?$/
 
     if([ petName, type, age, weight, comment ].includes('')) {
       setError(true)
@@ -129,7 +129,7 @@ const Form = ({ pet, pets, setPets, setPet }) => {
       >
         { error && <Error error='a ver si funca la chotada' />}
         <Input id='name' label='Pet name' placeholder='Name' value={petName} Hook={petNameHook} />
-        <Input id='type' label='Pet type' placeholder='type' value={type} Hook={typeHook} />
+        <Input id='type' label='Pet type' placeholder='Type' value={type} Hook={typeHook} />
         { numberError && <Error error='La edad y peso tienen que contener solo numeros' />}
         <Input id='age' label='Pet age' placeholder='Age' value={age} Hook={ageHook} />
         <Input id='weight' label='Pet weight' placeholder='Weight' value={weight} Hook={weightHook}/>
